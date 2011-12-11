@@ -1,4 +1,4 @@
-vmname=wxp3
+name=wxp3
 
 # ~/VirtualBox VMs/
 
@@ -11,26 +11,26 @@ ostype=WindowsXP
 isopath = ~/Downloads/isos/WinXP/xp.iso
 
 
-t3: t1 ~/VirtualBox\ VMs/$(vmname)/$(vmname).vdi configure
-	vboxmanage storagectl $(vmname) --name "IDE Controller" --add ide
-	vboxmanage storageattach $(vmname) --storagectl "IDE Controller" --port 0 --device 0 --type hdd --medium ~/VirtualBox\ VMs/$(vmname)/$(vmname).vdi
-#	 vboxmanage storagectl $(vmname) --name "SATA Controller" --add sata
-#	 vboxmanage storageattach $(vmname) --storagectl "SATA Controller" --port 1 --device 0 --type dvddrive --medium $(isopath)
-#	vboxmanage storagectl $(vmname) --name "IDE Controller" --add sata
-	vboxmanage storageattach $(vmname) --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium $(isopath)
-	vboxmanage startvm $(vmname)
+t3: t1 ~/VirtualBox\ VMs/$(name)/$(name).vdi configure
+	vboxmanage storagectl $(name) --name "IDE Controller" --add ide
+	vboxmanage storageattach $(name) --storagectl "IDE Controller" --port 0 --device 0 --type hdd --medium ~/VirtualBox\ VMs/$(name)/$(name).vdi
+#	 vboxmanage storagectl $(name) --name "SATA Controller" --add sata
+#	 vboxmanage storageattach $(name) --storagectl "SATA Controller" --port 1 --device 0 --type dvddrive --medium $(isopath)
+#	vboxmanage storagectl $(name) --name "IDE Controller" --add sata
+	vboxmanage storageattach $(name) --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium $(isopath)
+	vboxmanage startvm $(name)
 
 t3a: t3
 	rm -rf /tmp/t3a
-	find ~/VirtualBox\ VMs/$(vmname) -name "*.vdi" -prune -o -print | cpio -pamvd /tmp/t3a
+	find ~/VirtualBox\ VMs/$(name) -name "*.vdi" -prune -o -print | cpio -pamvd /tmp/t3a
 
 info:
-	vboxmanage showvminfo $(vmname)
+	vboxmanage showvminfo $(name)
 
 t2: t1 	~/VirtualBox\ VMs/w7.1/w7.1.vdi
 	$(show)
-#	vboxmanage startvm $(vmname)
-	vboxmanage showvminfo $(vmname)
+#	vboxmanage startvm $(name)
+	vboxmanage showvminfo $(name)
 
 .PHONY: t2
 
@@ -49,18 +49,18 @@ t1:
 # vboxmanage modifyvm boot disk
 # vboxmanage storagectl "IDE Controller" add ide
 
-# VBoxManage storagectl $(vmname) --name "IDE Controller" --add ide
-# VBoxManage storageattach $(vmname) --storagectl "IDE Controller" --port 0 --device 0 --type hdd --medium ~/VirtualBox\ VMs/$(vmname)/$(vmname).vdi
-# VBoxManage storageattach $(vmname) --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium ~/Downloads/isos/win7/win7.iso
+# VBoxManage storagectl $(name) --name "IDE Controller" --add ide
+# VBoxManage storageattach $(name) --storagectl "IDE Controller" --port 0 --device 0 --type hdd --medium ~/VirtualBox\ VMs/$(name)/$(name).vdi
+# VBoxManage storageattach $(name) --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium ~/Downloads/isos/win7/win7.iso
 
-hdd: ~/VirtualBox\ VMs/$(vmname)/$(vmname).vdi
-~/VirtualBox\ VMs/$(vmname)/$(vmname).vdi: ~/VirtualBox\ VMs/$(vmname)/$(vmname).vbox
+hdd: ~/VirtualBox\ VMs/$(name)/$(name).vdi
+~/VirtualBox\ VMs/$(name)/$(name).vdi: ~/VirtualBox\ VMs/$(name)/$(name).vbox
 	vboxmanage createhd \
-		--filename ~/VirtualBox\ VMs/$(vmname)/$(vmname).vdi \
-		--size 10000
+		--filename ~/VirtualBox\ VMs/$(name)/$(name).vdi \
+		--size 20000
 
-configure: ~/VirtualBox\ VMs/$(vmname)/$(vmname).vbox
-	vboxmanage modifyvm $(vmname) \
+configure: ~/VirtualBox\ VMs/$(name)/$(name).vbox
+	vboxmanage modifyvm $(name) \
 		--memory 868 \
 		--acpi on \
 		--usb on \
@@ -70,13 +70,23 @@ configure: ~/VirtualBox\ VMs/$(vmname)/$(vmname).vbox
 		--nic1 nat \
 		--bridgeadapter1 eth0 \
 		--vrdeport 3389
-	vboxmanage modifyvm $(vmname) --pae off
+	vboxmanage modifyvm $(name) --pae off
+
+start:
+	-vboxmanage controlvm $(name) poweroff
+	vboxmanage startvm $(name)
+.PHONY: start
+
+tmp:add_tmp_mount
+.PHONY: add_tmp_mount
+add_tmp_mount:
+	vboxmanage sharedfolder add $(name) --name tmp --hostpath /private/tmp --automount
 
 .PHONY: configure
 
-~/VirtualBox\ VMs/$(vmname)/$(vmname).vbox:
+~/VirtualBox\ VMs/$(name)/$(name).vbox:
 	vboxmanage createvm \
-		--name $(vmname) \
+		--name $(name) \
 		--ostype $(ostype) \
 		--register
 
@@ -102,11 +112,11 @@ show:
 .PHONY: show
 
 show = \
-	find ~/VirtualBox\ VMs/$(vmname)
+	find ~/VirtualBox\ VMs/$(name)
 
 clean = \
 	rm -f vmboxmanage.txt; \
 	vboxmanage closemedium disk \
-		~/VirtualBox\ VMs/$(vmname)/$(vmname).vdi \
+		~/VirtualBox\ VMs/$(name)/$(name).vdi \
 		--delete; \
-	vboxmanage unregistervm $(vmname) --delete
+	vboxmanage unregistervm $(name) --delete
