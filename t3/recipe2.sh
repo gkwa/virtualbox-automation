@@ -6,7 +6,7 @@ source $MY_DIR/recipe2_settings.sh
 source $MY_DIR/common.sh
 
 delete_vm "$vmname"
-VBoxManage createhd --filename "$vmbasedir/$vmname.vdi" --size $hdd_size --format VDI
+VBoxManage createhd --filename "$hdd_abspath" --size $hdd_size --format VDI
 VBoxManage createvm --name "$vmname" --ostype $ostype --register
 VBoxManage modifyvm "$vmname" --vram 80 # Fixes warning "Non-Optimal settings detected", 20 MB ram, set more for windows of course
 VBoxManage modifyvm "$vmname" --memory 1500
