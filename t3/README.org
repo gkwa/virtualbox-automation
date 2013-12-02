@@ -1,6 +1,6 @@
 * 
 
-make r2
+make
 vboxmanage startvm t11
 
 * Compare virutal machine settings: diff -uw <(vboxmanage showvminfo t10) <(vboxmanage showvminfo t6)
