@@ -1,0 +1,3 @@
+* Compare virutal machine settings: diff -uw <(vboxmanage showvminfo t10) <(vboxmanage showvminfo t6)
+
+diff -uw <(vboxmanage showvminfo t10) <(vboxmanage showvminfo t6)

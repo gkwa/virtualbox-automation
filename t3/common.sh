@@ -21,7 +21,7 @@ delete_vm()
     cut -d\" -f2 |
     while read vm
     do
-	if test "z$vm" = "z$vname"
+	if test "z$vm" = "z$vmname"
 	then
 	    VBoxManage controlvm "$vm" poweroff
 	fi

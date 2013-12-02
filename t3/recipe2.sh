@@ -19,25 +19,32 @@ VBoxManage modifyvm "$vmname" --boot2 dvd
 VBoxManage modifyvm "$vmname" --boot1 disk
 VBoxManage modifyvm "$vmname" --clipboard bidirectional
 VBoxManage modifyvm "$vmname" --draganddrop hosttoguest
-VBoxManage modifyvm "$vmname" --nic1 bridged --bridgeadapter1 "$nic1_bridged_adapter"
 VBoxManage modifyvm "$vmname" --ioapic on
 VBoxManage modifyvm "$vmname" --pae on # I need this on.  It took me a long time to disover this PAE should be on
+VBoxManage modifyvm "$vmname" --nic1 bridged \
+    --bridgeadapter1 "$nic1_bridged_adapter" --nictype1 virtio
 
 # #############################
 # Sata Controller
 # #############################
-VBoxManage storagectl "$vmname" --name "SATA Controller" --add sata
+VBoxManage storagectl "$vmname" --name "SATA Controller" --add sata --portcount 4
 VBoxManage storageattach "$vmname" --storagectl "SATA Controller" \
     --port 0 --device 0 --type hdd --medium "$vmbasedir/$vmname.vdi"
+
+if test ! -z "$iso1"
+then
+    VBoxManage storageattach "$vmname" --storagectl "SATA Controller" \
+	--port 1 --device 0 --type dvddrive --medium "$iso1"
+fi
 
 if test ! -z "$iso2"
 then
     VBoxManage storageattach "$vmname" --storagectl "SATA Controller" \
-	--port 1 --device 0 --type dvddrive --medium "$iso2"
+	--port 2 --device 0 --type dvddrive --medium "$iso2"
 fi
 
 if test ! -z "$iso3"
 then
     VBoxManage storageattach "$vmname" --storagectl "SATA Controller" \
-	--port 2 --device 0 --type dvddrive --medium "$iso3"
+	--port 3 --device 0 --type dvddrive --medium "$iso3"
 fi
