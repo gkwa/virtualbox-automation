@@ -20,8 +20,7 @@ wget -nv -nc http://alt.fedoraproject.org/pub/alt/virtio-win/latest/images/$virt
 ostype=Windows7
 vmbasedir=d:/vbox/$vmname
 hdd="$vmname.vdi"
-# hdd_abspath=$vmbasedir/$hdd
-hdd_abspath=$hdd
+hdd_abspath=$vmbasedir/$hdd
 hdd_size=$((100*1000)) #GB
 iso1=d:/dsw7pro/Boot/LiteTouchPE_x86.iso
 iso2=c:/Program\ Files/Oracle/VirtualBox/VBoxGuestAdditions.iso
