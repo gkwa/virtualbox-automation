@@ -2,7 +2,7 @@ set -o errexit
 set -o nounset
 
 
-vmname=t11
+vmname=t12
 nic1_bridged_adapter="Intel(R) 82579V Gigabit Network Connection"
 
 basedir=$(pwd)
