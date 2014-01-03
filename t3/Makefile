@@ -13,6 +13,9 @@ r3:
 r2:
 	sh recipe2.sh
 
+r1:
+	sh recipe1.sh
+
 t: adapter1.txt
 	sh -x recipe1.sh
 
