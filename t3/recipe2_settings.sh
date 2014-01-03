@@ -2,7 +2,7 @@ set -o errexit
 set -o nounset
 
 
-vmname=t12
+vmname=$(echo $0 | sed -e 's,_settings,,' -e 's,\.sh,,')
 nic1_bridged_adapter="Intel(R) 82579V Gigabit Network Connection"
 
 basedir=$(pwd)
