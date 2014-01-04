@@ -23,6 +23,7 @@ VBoxManage modifyvm "$vmname" --ioapic on
 VBoxManage modifyvm "$vmname" --pae on # I need this on.  It took me a long time to disover this PAE should be on
 VBoxManage modifyvm "$vmname" --nic1 bridged \
     --bridgeadapter1 "$nic1_bridged_adapter" --nictype1 virtio
+VBoxManage modifyvm "$vmname" --vcpenabled on
 
 # #############################
 # IDE Controller

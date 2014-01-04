@@ -22,6 +22,7 @@ VBoxManage modifyvm "$vmname" --boot1 disk
 VBoxManage modifyvm "$vmname" --clipboard bidirectional
 VBoxManage modifyvm "$vmname" --draganddrop hosttoguest
 VBoxManage modifyvm "$vmname" --nic1 bridged --bridgeadapter1 "$nic1_bridged_adapter"
+VBoxManage modifyvm "$vmname" --vcpenabled on
 
 # I need this on.  It took me a long time to disover this PAE should be on
 VBoxManage modifyvm "$vmname" --pae on
