@@ -1,0 +1,26 @@
+set -o errexit
+set -o nounset
+
+vmname=$(echo $0 | sed -e 's,_settings,,' -e 's,\.sh,,')
+nic1_bridged_adapter="Intel(R) 82579V Gigabit Network Connection"
+
+basedir=$(pwd)
+if test "z$(uname -s | grep -i cygwin)" != z
+then
+    basedir=$(cygpath --mixed -w "$(pwd)")
+fi
+
+virtio_net_version=0.1-74
+virtio_net_iso=virtio-win-${virtio_net_version}.iso
+virtio_net_iso_abspath=$basedir/$virtio_net_iso
+
+wget -nv --timestamping http://alt.fedoraproject.org/pub/alt/virtio-win/latest/images/$virtio_net_iso
+
+ostype=Windows7
+vmbasedir=d:/vbox/$vmname
+hdd="$vmname.vdi"
+hdd_abspath=$vmbasedir/$hdd
+hdd_size=$((25*1000)) #GB
+iso1=d:/LiteTouchPE_x86.iso
+iso1=d:/d3c/d3m_msi_imq35/WS7E_MSI_IMQ35.iso
+iso3=$virtio_net_iso_abspath
