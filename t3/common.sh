@@ -1,6 +1,6 @@
 delete_vm()
 {
-    vboxmanage list runningvms |
+    VBoxManage list runningvms |
     cut -d\" -f2 |
     while read vm
     do
@@ -10,7 +10,7 @@ delete_vm()
 	fi
     done
 
-    vboxmanage list vms |
+    VBoxManage list vms |
     cut -d\" -f2 |
     while read vm
     do
