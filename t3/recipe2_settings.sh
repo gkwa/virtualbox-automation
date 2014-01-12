@@ -23,6 +23,6 @@ vmbasedir=d:/vbox/$vmname
 hdd="$vmname.vdi"
 hdd_abspath=$vmbasedir/$hdd
 hdd_size=$((100*1000)) #GB
-iso1=d:/dsw7pro/Boot/LiteTouchPE_x86.iso
+iso1=c:/ds/Boot/LiteTouchPE_x86.iso
 iso2=c:/Program\ Files/Oracle/VirtualBox/VBoxGuestAdditions.iso
 iso3=$virtio_net_iso_abspath
