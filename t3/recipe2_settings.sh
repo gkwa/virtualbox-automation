@@ -3,7 +3,8 @@ set -o nounset
 
 
 vmname=$(echo $0 | sed -e 's,_settings,,' -e 's,\.sh,,')
-nic1_bridged_adapter="Intel(R) 82579V Gigabit Network Connection"
+# nic1_bridged_adapter="Intel(R) 82579V Gigabit Network Connection"
+nic1_bridged_adapter="Citrix PV Ethernet Adapter #0"
 
 basedir=$(pwd)
 if test "z$(uname -s | grep -i cygwin)" != z
