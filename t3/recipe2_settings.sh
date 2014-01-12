@@ -19,7 +19,7 @@ virtio_net_iso_abspath=$basedir/$virtio_net_iso
 wget -nv --timestamping http://alt.fedoraproject.org/pub/alt/virtio-win/latest/images/$virtio_net_iso
 
 ostype=Windows7
-vmbasedir=d:/vbox/$vmname
+vmbasedir="c:/cygwin64/home/Administrator/VirtualBox VMs/$vmname"
 hdd="$vmname.vdi"
 hdd_abspath=$vmbasedir/$hdd
 hdd_size=$((100*1000)) #GB

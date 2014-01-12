@@ -10,6 +10,12 @@ VBoxManage createhd --filename "$hdd_abspath" --size $hdd_size --format VDI
 VBoxManage createvm --name "$vmname" --ostype $ostype --register
 VBoxManage modifyvm "$vmname" --vram 80 # Fixes warning "Non-Optimal settings detected", 20 MB ram, set more for windows of course
 VBoxManage modifyvm "$vmname" --memory 2048
+# VBoxManage setproperty hwvirtexclusive off
+# VBoxManage modifyvm "$vmname" --nestedpaging off
+VBoxManage modifyvm "$vmname" --largepages off
+VBoxManage modifyvm "$vmname" --vtxvpid off
+# VBoxManage setextradata "$vmname" VBoxInternal/CPUM/CMPXCHG16B 1 # https://blogs.oracle.com/fatbloke/entry/using_virtualbox_to_test_drive
+VBoxManage modifyvm "$vmname" --hwvirtex off
 VBoxManage modifyvm "$vmname" --acpi on
 VBoxManage modifyvm "$vmname" --usb on
 VBoxManage modifyvm "$vmname" --mouse usb
