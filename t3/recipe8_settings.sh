@@ -22,5 +22,6 @@ hdd="$vmname.vdi"
 hdd_abspath=$vmbasedir/$hdd
 hdd_size=$((25*1000)) #GB
 iso1=$(ls -1dt /c/MDTDStest* | head -1 | xargs -I@ find @ -iname "LiteTouchPE_x86.iso" | xargs cygpath --mixed)
+iso1=$(ls -1dt /c/media/MDTDStest* | head -1 | xargs -I@ find @ -iname "LiteTouchMedia.iso" | xargs cygpath --mixed)
 iso2=c:/Program\ Files/Oracle/VirtualBox/VBoxGuestAdditions.iso
 iso3=$virtio_net_iso_abspath
