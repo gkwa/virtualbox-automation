@@ -22,5 +22,6 @@ r1:
 t: adapter1.txt
 	sh -x recipe1.sh
 
+nic: adapter1.txt
 adapter1.txt:
 	./devcon listclass net
