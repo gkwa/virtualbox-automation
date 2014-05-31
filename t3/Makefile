@@ -1,3 +1,6 @@
+r8:
+	sh recipe8.sh
+
 r7:
 	sh recipe7.sh
 
