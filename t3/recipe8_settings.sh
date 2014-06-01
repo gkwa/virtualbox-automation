@@ -1,4 +1,3 @@
-set -o errexit
 set -o nounset
 
 MY_DIR=`dirname $0`
