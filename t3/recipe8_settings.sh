@@ -32,5 +32,5 @@ hdd="$vmname.vdi"
 hdd_abspath=$vmbasedir/$hdd
 hdd_size=$((25*1000)) #GB
 iso1=$(ls -1dt $DATA_DRIVE/MDTDS[Tt]est* | head -1 | xargs -I@ find @ -iname "*.iso" | xargs ls -t | head -1 | xargs cygpath --mixed)
-iso2="`cygpath --mixed "$(cygpath -u -F 42)/Oracle/VirtualBox/VBoxGuestAdditions.iso"`"
+iso2="`cygpath --mixed "$(cygpath -u -F 38)/Oracle/VirtualBox/VBoxGuestAdditions.iso"`"
 iso3=$virtio_net_iso_abspath
