@@ -1,10 +1,10 @@
 set -o errexit
 set -o nounset
 
-DATA_DRIVE=$(printenv DATA_DRIVE)
 MY_DIR=`dirname $0`
 source $MY_DIR/common.sh
 
+DATA_DRIVE=$(printenv DATA_DRIVE)
 if test -z "$DATA_DRIVE"
 then
     echo "set DATA_DRIVE environment variable first (eg DATA_DRIVE=D:)"
