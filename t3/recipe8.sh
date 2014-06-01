@@ -3,6 +3,11 @@ set -o nounset
 
 MY_DIR=`dirname $0`
 source $MY_DIR/recipe8_settings.sh
+if [ $? -ne 0 ]
+then
+    $MY_DIR/recipe8_settings.sh exitted with nonzero exit status, quitting
+    exit 1
+fi
 source $MY_DIR/common.sh
 
 delete_vm "$vmname"
