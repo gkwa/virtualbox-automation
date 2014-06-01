@@ -2,6 +2,9 @@ set -o errexit
 set -o nounset
 
 DATA_DRIVE=$(printenv DATA_DRIVE)
+MY_DIR=`dirname $0`
+source $MY_DIR/common.sh
+
 if test -z "$DATA_DRIVE"
 then
     echo "set DATA_DRIVE environment variable first (eg DATA_DRIVE=D:)"
@@ -9,7 +12,8 @@ then
 fi
 
 vmname=$(echo $0 | sed -e 's,_settings,,' -e 's,\.sh,,')
-nic1_bridged_adapter="Intel(R) 82579V Gigabit Network Connection"
+download_devcon
+nic1_bridged_adapter=$(devcon/i386/devcon.exe hwids =net PCI\\VEN* | sed -ne '/Name:/{s,^[[:blank:]]*Name: ,,;p;q;}')
 
 basedir=$(pwd)
 if test "z$(uname -s | grep -i cygwin)" != z

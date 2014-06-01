@@ -22,9 +22,5 @@ r2:
 r1:
 	sh recipe1.sh
 
-t: adapter1.txt
-	sh -x recipe1.sh
-
-nic: adapter1.txt
-adapter1.txt:
-	./devcon listclass net
+clean:
+	rm -rf devcon
