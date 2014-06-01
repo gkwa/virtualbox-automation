@@ -48,29 +48,6 @@ VBoxManage storagectl "$vmname" --name "SATA Controller" --add sata --portcount 
 VBoxManage storageattach "$vmname" --storagectl "SATA Controller" \
 	--port 0 --device 0 --type dvddrive --medium "$iso1"
 
-
-
-
-
-
-
-exit
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if test ! -z "$iso2"
 then
     VBoxManage storageattach "$vmname" --storagectl "SATA Controller" \
